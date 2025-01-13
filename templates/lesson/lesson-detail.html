@@ -1,0 +1,67 @@
+{% extends 'partials/_base.html' %} 
+{% load static %} 
+{% load i18n %} 
+
+{% block title %}
+  Ders detayları
+{% endblock %} 
+
+{% block content %}
+
+    <section>
+        <div class="gap remove-bottom black-layer2 opc85">
+        <div class="fixed-bg" style="background-image: url({{ banner.lesson_detail_img.url }})"></div>
+        <div class="container">
+            <div class="page-title-wrap">
+            <h1 style="color: white;">{{ banner.lesson_detail_arabic_text }}</h1>
+            <h2>{{ lesson.title }}</h2>
+            <ul class="breadcrumbs">
+                <li>
+                <a href="{% url 'base:index' %}">Anasayfa</a>
+                </li>
+                <li>
+                <a href="{% url 'lesson:lessons' %}">Dersler</a>
+                </li>
+                <li>{{ lesson.title }}</li>
+            </ul>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="gap">
+        <div class="container">
+            <div class="blog-detail-wrp">
+            <div class="row justify-content-center">
+                <div class="col-md-9 col-sm-12 col-lg-9">
+                <div class="blog-detail">
+                    <div class="blog-detail-inf brd-rd5">
+                    <iframe width="100%" height="450" src="{{ lesson.video_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="blog-detail-inf-inr">
+                        <h4>{{ lesson.title }}</h4>
+                        <ul class="pst-mta">
+                        <li>
+                            <i class="fa fa-calendar-o thm-clr"></i>{{ lesson.created_at|date:"M d, Y" }}
+                        </li>
+                        <li>
+                            <i class="fa fa-user-o thm-clr"></i>{{ lesson.author }}
+                        </li>
+                        <li>
+                            <i class="fa fa-clock-o thm-clr"></i>{{ lesson.created_at|date:"l, h:i" }}
+                        </li>
+                        </ul>
+                    </div>
+                    </div>
+                    <div class="blog-detail-desc">
+                    <p>{{ lesson.description|linebreaks }}</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    
+{% endblock %}

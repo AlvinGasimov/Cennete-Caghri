@@ -1,0 +1,7 @@
+ikonlar islamın şartları = (
+    1. Kelimeyi şehadet - Şehadet ederim ki, Allahdan başka ilah yoktur, ve Muhammed (sav) Onun kulu ve elçisidir. - fa-regular fa-hand-point-up
+    2. Namaz - Şüphesiz ki namaz, belirlenmiş vakitler içinde müminlere farz kılınmıştır. (4/Nisa, 103) - flaticon-islamic-pray
+    3. Zekat - Hâlbuki onlar, ancak dini O’na halis kılan hanifler olarak Allah’a ibadet etmekle, namazı dosdoğru kılıp, zekâtı vermekle emrolunmuşlardı. İşte dosdoğru din budur. (98/Beyyine, 5) - flaticon-charity
+    4. Oruç - Ey iman edenler! Sizden öncekilere oruç farz kılındığı gibi size de farz kılındı. (2/Bakara, 183) - flaticon-islamic-ramadan
+    5. Hacc - Hac ve umreyi Allah için tamamlayın. (2/Bakara, 196) - flaticon-kaaba-building
+)

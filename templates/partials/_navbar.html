@@ -1,0 +1,78 @@
+{% load static %} 
+{% load i18n %} 
+{% load custom_filters %}
+
+<div class="pageloader-wrap">
+  <div class="loader">
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__ball"></div>
+  </div>
+</div>
+
+<header class="style1">
+  <div class="container">
+    <div class="logo">
+      <a href="{% url 'base:index' %}" title="Logo"><img src="{{ item.navbar_img.url }}" width="60px" style="border-radius: 10px" alt="navbar-logo" /></a>
+    </div>
+    <nav>
+      <div>
+        <ul>
+          <li class="font-weight-bold">
+            <a href="{% url 'base:index' %}" class="{% if request.path == '/' %} activer {% endif %}">Anasayfa</a>
+          </li>
+          <li class="font-weight-bold">
+            <a href="{% url 'base:about' %}" class="{% if request.path == '/hakkımızda/' %} activer {% endif %}">Hakkımızda</a>
+          </li>
+          <li class="font-weight-bold">
+            <a href="{% url 'article:articles' %}" class="{% if request.path|startswith:'/makale/' %} activer {% endif %}">Makale</a>
+          </li>
+          <li class="font-weight-bold">
+            <a href="{% url 'lesson:lessons' %}" class="{% if request.path|startswith:'/ders/' %} activer {% endif %}">Dersler</a>
+          </li>
+          <li class="font-weight-bold">
+            <a href="{% url 'galery:galeries' %}" class="{% if request.path == '/galeri/' %} activer {% endif %}">Galeri</a>
+          </li>
+          <li class="font-weight-bold">
+            <a href="{% url 'contact:contact' %}" class="{% if request.path == '/iletisim/' %} activer {% endif %}">İletişim</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="rspn-hdr">
+  <div class="lg-mn">
+    <div class="logo">
+      <a href="{% url 'base:index' %}" title="Logo"><img src="{{ item.navbar_img.url }}" width="60px" style="border-radius: 10px" alt="navbar-logo" /></a>
+    </div>
+    <span class="rspn-mnu-btn"><i class="fa fa-list-ul"></i></span>
+  </div>
+  <div class="rsnp-mnu">
+    <span class="rspn-mnu-cls"><i class="fa fa-times"></i></span>
+    <ul>
+      <li class="font-weight-bold">
+        <a href="{% url 'base:index' %}">Anasayfa</a>
+      </li>
+      <li class="font-weight-bold">
+        <a href="{% url 'base:about' %}">Hakkımızda</a>
+      </li>
+      <li class="font-weight-bold">
+        <a href="{% url 'article:articles' %}">Makale</a>
+      </li>
+      <li class="font-weight-bold activer">
+        <a href="{% url 'lesson:lessons' %}">Dersler</a>
+      </li>
+      <li class="font-weight-bold">
+        <a href="{% url 'galery:galeries' %}">Galeri</a>
+      </li>
+      <li class="font-weight-bold">
+        <a href="{% url 'contact:contact' %}">İletişim</a>
+      </li>
+    </ul>
+  </div>
+</div>

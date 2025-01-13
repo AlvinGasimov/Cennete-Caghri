@@ -1,0 +1,151 @@
+{% extends 'partials/_base.html' %} 
+{% load static %} 
+{% load i18n %} 
+
+{% block title %}
+  Ana Sayfa
+{% endblock %} 
+
+{% block content %}
+
+  <section style="border-bottom: 3px solid #E8C960;">
+    <div class="gap no-gap owl-yellow">
+      <div class="featured-area-wrap text-center">
+        <div class="featured-area owl-carousel">
+            {% for slider in home_sliders %}
+                <div class="featured-item" style="height: 100vh; background-image: url({{ slider.image.url }}); padding: 130px 15px 90px 15px;">
+                    <div class="featured-cap" style="padding: 30px 0 100px 0;">
+                    <h1 style="color: #E8C960; margin-bottom: 30px;">بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ </h1>
+                    <h2 style="color: white; margin-bottom: 30px;">{{ slider.text_arabic }}</h2>
+                    <h3> {{ slider.text_translation }}</h3>
+                    <span>{{ slider.source }}</span>
+                    <a class="thm-btn brd-rd40" href="{% url 'lesson:lessons' %}">Read More</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-bottom: 1px solid #E8C960;">
+    <div class="gap" style="padding: 60px 0;">
+      <div class="lft-shp shp-lyr"></div>
+      <div class="container">
+        <div class="plrs-wrap text-center remove-ext5">
+          <div class="row">
+            {% for condition in conditions %}
+                {% if forloop.first %}
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                {% else %}
+                    <div class="col-md-3 col-sm-6 col-lg-3">
+                {% endif %}
+                    <div class="plr-box">
+                    <i class="{{ condition.icon }}"></i>
+                    <div class="pilr-info">
+                        <h4>{{ condition.title }}</h4>
+                        <p>{{ condition.description|linebreaks }}</p>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-bottom: 1px solid #E8C960;">
+    <div class="gap white-grad-layer">
+      <div class="fixed-bg" style="background-image: url({{ about.image.url }})"></div>
+      <div class="container">
+        <div class="abot-wrap">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-lg-6">
+              <div class="abot-sec">
+                <div class="sec-title">
+                  <div class="sec-title-inner">
+                    <span>Hakkımızda</span>
+                    <h3>{{ about.title }}</h3>
+                  </div>
+                </div>
+                <p>{{ about.description }}</p>
+                <a class="thm-btn brd-rd40" href="{% url 'base:about' %}">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="my-5">
+      <div class="container">
+        <div class="blog-wrap remove-ext7">
+            <h2 class="text-center my-5" style="color: #D1AC3C;">Makaleler</h2>
+            <div class="row mrg40">
+                {% for article in last_6_articles %}
+                    <div class="col-md-4 col-sm-6 col-lg-4 fadeIn" data-wow-duration=".8s" data-wow-delay=".{{ forloop.counter|floatformat:1 }}s">
+                        <div class="blog-box">
+                            <div class="blog-thmb">
+                                <a href="{% url 'article:article_detail' article.slug %}">
+                                    <img src="{{ article.image.url }}" style="height: 250px;" alt="{{ article.title }}" />
+                                </a>
+                            </div>
+                            <div class="blog-info">
+                                <ul class="pst-mta2">
+                                    <li>
+                                        <a href="{% url 'article:article_by_category' article.category.slug %}">{{ article.category }}</a>
+                                    </li>
+                                </ul>
+                                <h4><a href="{% url 'article:article_detail' article.slug %}">{{ article.title }}</a></h4>
+                                <p>{{ article.description|truncatewords:20 }}</p>
+                                <a href="{% url 'article:article_detail' article.slug %}">Daha Fazla Oku</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+          <div class="d-flex justify-content-center">
+            <a class="thm-btn brd-rd40" href="{% url 'article:articles' %}">Daha Fazlası...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-5">
+    <div class="gap thm-layer opc9 mt-5">
+      <div class="fixed-bg" style="background-image: url({% static 'assets/images/parallax7.jpg' %})"></div>
+      <div class="container">
+        <div class="nwsltr-wrp text-center">
+          <div class="nwsltr-innr">
+            <div class="mb-3">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div style="background-color: #000; color: #CFAF4C; padding: 10px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #000;" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="nwsltr-title">
+              <h3>Abonelik</h3>
+              <span>Yeni bilgilerden haberdar olmak için abone olun.</span>
+            </div>
+            <form action="{% url 'base:index' %}" method="post">
+              {% csrf_token %}
+              {{ form.email }}
+              <button type="submit">Abone Ol</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

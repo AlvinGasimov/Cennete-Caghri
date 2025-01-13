@@ -1,0 +1,104 @@
+{% extends 'partials/_base.html' %} 
+{% load static %} 
+{% load i18n %} 
+
+{% block title %}
+  İletişim
+{% endblock %} 
+
+{% block content %}
+  <section>
+    <div class="gap remove-bottom black-layer2 opc85">
+      <div class="fixed-bg" style="background-image: url({{ banner.contact_img.url }})"></div>
+      <div class="container">
+        <div class="page-title-wrap">
+          <h1 style="color: white;">{{ banner.contact_arabic_text }}</h1>
+          <h2>İletişim</h2>
+          <ul class="breadcrumbs">
+            <li>
+              <a href="{% url 'base:index' %}">Anasayfa</a>
+            </li>
+            <li>İletişim</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="gap">
+      <div class="container">
+        <div class="sec-title text-center">
+          <div class="sec-title-inner">
+            <span>Bilgi Alın</span>
+            <h3>İletişim Bilgileri</h3>
+          </div>
+        </div>
+        <div class="contact-info-wrap text-center remove-ext3">
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-lg-4">
+              <div class="contact-info-box" style="height: 250px">
+                <i class="flaticon-location-pin"></i>
+                <strong>Adres</strong>
+                <span>{{ item.address }}</span>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-4">
+              <div class="contact-info-box" style="height: 250px">
+                <i class="flaticon-call"></i>
+                <strong>Telefon Numaraları</strong>
+                {% if phones %}
+                  {% for phone in phones %}
+                    <span>{{ phone.title }}: {{ phone.phone_number }}</span>
+                  {% endfor %}
+                {% else %}
+                  <span>{{ item.main_phone_number }}</span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-4">
+              <div class="contact-info-box" style="height: 250px">
+                <i class="flaticon-email"></i>
+                <strong>Email</strong>
+                <a href="mailto:{{ item.email }}">{{ item.email }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div class="gap no-gap">
+      <div class="container">
+        <div class="sec-title text-center">
+          <div class="sec-title-inner">
+            <span>Sorunuzmu var?</span>
+            <h3>Mesaj Gönderin</h3>
+          </div>
+        </div>
+        <div class="contact-form text-center">
+          {% if messages %}
+            {% for message in messages %}
+                <div style=" background-color: #000; color: #cfaf4c; padding: 10px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #000;" role="alert"> {{ message }}</div>
+            {% endfor %}
+          {% endif %}
+          <form method="post" action="{% url 'contact:contact' %}">
+            {% csrf_token %}
+            <div class="row mrg20">
+              <div class="col-md-6 col-sm-6 col-lg-6">{{ contact_form.name }}</div>
+              <div class="col-md-6 col-sm-6 col-lg-6">{{ contact_form.email }}</div>
+              <div class="col-md-6 col-sm-6 col-lg-6">{{ contact_form.phone }}</div>
+              <div class="col-md-6 col-sm-6 col-lg-6">{{ contact_form.subject }}</div>
+              <div class="col-md-12 col-sm-12 col-lg-12"> {{ contact_form.message }}
+                <button class="thm-btn brd-rd40" type="submit">Bize Ulaşın</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock %}

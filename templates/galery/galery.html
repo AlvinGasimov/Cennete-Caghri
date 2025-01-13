@@ -1,0 +1,88 @@
+{% extends 'partials/_base.html' %} 
+{% load static %} 
+{% load i18n %} 
+{% block title %}
+  Galeri
+{% endblock %} 
+
+{% block content %}
+  <section>
+    <div class="gap remove-bottom black-layer2 opc85">
+      <div class="fixed-bg" style="background-image: url({{ banner.galery_img.url }})"></div>
+      <div class="container">
+        <div class="page-title-wrap">
+          <h1 style="color: white;">{{ banner.galery_arabic_text }}</h1>
+          <h2>Galeri</h2>
+          <ul class="breadcrumbs">
+            <li>
+              <a href="{% url 'base:index' %}">Anasayfa</a>
+            </li>
+            <li>Galeri</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="gap">
+      <div class="container">
+        <div class="prtfl-wrap text-center">
+          <div class="prtfl-dta remove-ext1">
+            <div class="row mrg15 masonry">
+              {% if page_obj %}
+                {% for image in page_obj %}
+                  <div class="col-md-4 col-sm-6 col-lg-4 fltr-itm fltr-itm1">
+                    <div class="prtfl-box">
+                      <img src="{{ image.image.url }}" alt="{{ image.title }}" style="height: 350px" />
+                      <div class="prtfl-info">
+                        <a href="{{ image.image.url }}" data-fancybox="gallery"><i class="fa fa-plus text-warning" style="font-size: 40px"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <div class="alert alert-warning" role="alert" style="background-color: #FFF3CD; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <i class="fa fa-exclamation-circle" style="margin-right: 10px; font-size: 20px;"></i> 
+                    Henüz resim ilave olunmayıb
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination-wrap text-center">
+          <ul class="pagination">
+            {% if page_obj.has_previous %}
+              <li>
+                <a href="?page={{ page_obj.previous_page_number }}" title="Previous">&laquo;</a>
+              </li>
+            {% else %}
+              <li class="disabled">
+                <a href="" title="Previous">&laquo;</a>
+              </li>
+            {% endif %} {% for num in page_obj.paginator.page_range %}
+              {% if num == page_obj.number %}
+                <li class="active">
+                  <a href="" title="Page {{ num }}">{{ num }}</a>
+                </li>
+              {% elif num >= page_obj.number|add:'-2' and num <= page_obj.number|add:'2' %}
+                <li>
+                  <a href="?page={{ num }}" title="Page {{ num }}">{{ num }}</a>
+                </li>
+              {% endif %}
+            {% endfor %} {% if page_obj.has_next %}
+              <li>
+                <a href="?page={{ page_obj.next_page_number }}" title="Next">&raquo;</a>
+              </li>
+            {% else %}
+              <li class="disabled">
+                <a href="" title="Next">&raquo;</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

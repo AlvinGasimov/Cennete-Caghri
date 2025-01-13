@@ -1,0 +1,110 @@
+{% load static %}
+{% load i18n %}
+
+<footer>
+  <div class="gap top-spac70 drk-bg2 remove-bottom">
+    <div class="container">
+      <div class="footer-data">
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-lg-4">
+            <div class="wdgt-box">
+              <div class="logo">
+                <a href="{% url 'base:index' %}" title="Logo"><img src="{{ item.footer_img.url }}" width="100px" style="border-radius: 10px" alt="logo.png" /></a>
+              </div>
+              <p>{{ item.description }}</p>
+            </div>
+          </div>
+          <div class="col-md-8 col-sm-12 col-lg-8">
+            <div class="row justify-content-center">
+              <div class="col-md-6 col-sm-4 col-lg-6">
+                <div class="wdgt-box">
+                  <h4>Sayfalar</h4>
+                  <ul>
+                    <li>
+                      <a href="{% url 'base:about' %}">Hakkımızda</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'article:articles' %}">Makaleler</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'lesson:lessons' %}">Dersler</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'galery:galeries' %}">Galeri</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'contact:contact' %}">İletişim</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-4 col-lg-6">
+                <div class="wdgt-box">
+                  <h4>İletişim</h4>
+                  <ul class="cont-lst">
+                    <li>
+                      <i class="flaticon-location-pin"></i>{{ item.address }}
+                    </li>
+                    <li>
+                      {% comment %} <i class="flaticon-call"></i><a href="tel:{{ item.main_phone_number }}">{{ item.main_phone_number }}</a> {% endcomment %}
+                    {% if phones %}
+                        {% for phone in phones %}
+                            <i class="flaticon-call"></i>
+                            <a href="tel:{{ phone.phone_number }}">{{ phone.phone_number }}</a>
+                            <br>
+                        {% endfor %}
+                    {% else %}
+                        <i class="flaticon-call"></i>
+                        <a href="tel:{{ item.main_phone_number }}">{{ item.main_phone_number }}</a>
+                    {% endif %}
+
+                    </li>
+                    <li>
+                      <i class="flaticon-email"></i><a href="mailto:{{ item.email }}">{{ item.email }}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <p class="text-center text-white mb-3">
+          &copy;
+          <span style="color: #ccac48; font-weight: bolder">{{ item.title }}</span>
+          <script>
+            document.write(new Date().getFullYear())
+          </script> Tüm hakları saklıdır.
+        </p>
+
+        <div class="scl d-flex justify-content-center">
+          
+            {% if item.facebook %}
+                <a href="{{ item.facebook }}" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+            {% endif %} 
+          
+            {% if item.instagram %}
+                <a href="{{ item.instagram }}" title="Instagram" target="_blank"><i class="fa fa-instagram"></i></a>
+            {% endif %} 
+          
+            {% if item.twitter %}
+                <a href="{{ item.twitter }}" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+            {% endif %} 
+          
+            {% if item.youtube_1 %}
+                <a href="{{ item.youtube_1 }}" title="Youtube" target="_blank"><i class="fa fa-youtube"></i></a>
+            {% endif %} 
+          
+            {% if item.youtube_2 %}
+                <a href="{{ item.youtube_2 }}" title="Youtube1" target="_blank"><i class="fa fa-youtube"></i></a>
+            {% endif %} 
+          
+            {% if item.youtube_3 %}
+                <a href="{{ item.youtube_3 }}" title="Youtube2" target="_blank"><i class="fa fa-youtube"></i></a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
