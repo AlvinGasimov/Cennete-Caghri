@@ -2,10 +2,10 @@ from django.contrib import admin
 from .models import (
     GeneralItem, HomeSlider,
     Phone, IslamicConditions, 
-    About, CommunityService, 
-    Service, Mission, 
+    About, Mission, 
     SubMission, Subscribe,
-    PageBanner
+    PageBanner, Contact,
+    Galery, SEOModel
 )
 
 @admin.register(GeneralItem)
@@ -37,19 +37,6 @@ class AboutAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
     
     
-    
-@admin.register(CommunityService)
-class CommunityServiceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'image',)
-    search_fields = ('title', 'description')
-    
-    
-@admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'icon',)
-    search_fields = ('title', 'description',)
-    
-    
 class SubMissionInline(admin.TabularInline):
     model = SubMission
     extra = 1
@@ -71,3 +58,20 @@ class SubscribeAdmin(admin.ModelAdmin):
 class PageBannerAdmin(admin.ModelAdmin):
     list_display = ('title',)
     search_fields = ('title',)
+    
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'phone', 'subject', 'created_at')
+    search_fields = ('name', 'email', 'phone', 'subject', 'message')
+    
+
+@admin.register(Galery)
+class GaleryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'image')
+    search_fields = ('title',)
+    
+
+@admin.register(SEOModel)
+class SEOModelAdmin(admin.ModelAdmin):
+    list_display = ('title', 'image', 'keywords', 'twitter_handle')

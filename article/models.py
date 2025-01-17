@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from base.models import Subscribe
+from ckeditor.fields import RichTextField
 
 class ArticleCategory(models.Model):
     name = models.CharField(max_length=200, verbose_name='Makale Kategori Adı')
@@ -30,7 +31,7 @@ class ArticleCategory(models.Model):
 class Article(models.Model):
     category = models.ForeignKey(ArticleCategory, on_delete=models.CASCADE, verbose_name='Makale Kategorisi', related_name='articles')
     title = models.CharField(max_length=200, verbose_name='Makale Başlığı')
-    description = models.TextField(verbose_name = 'Makale Açıklaması')
+    description = RichTextField(verbose_name = 'Makale Açıklaması')
     author = models.CharField(max_length=200, verbose_name='Makale Yazarı')
     image = models.ImageField(upload_to='article_images/', verbose_name='Makale Resmi')
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True, verbose_name='Slug')
@@ -49,15 +50,15 @@ class Article(models.Model):
         verbose_name_plural = 'Makaleler'
         
 
-@receiver(post_save, sender=Article)
-def send_email_on_new_article(sender, instance, created, **kwargs):
-    if created:  # Yalnız yeni məqalə yaradıldıqda
-        subscribers = Subscribe.objects.all()
+# @receiver(post_save, sender=Article)
+# def send_email_on_new_article(sender, instance, created, **kwargs):
+#     if created:  # Yalnız yeni məqalə yaradıldıqda
+#         subscribers = Subscribe.objects.all()
 
-        for subscriber in subscribers:
-            send_mail(
-                'Yeni Məqalə Yayınlandı',
-                f'{instance.title} adlı yeni məqalə yayımlandı. Məqaləni oxumaq üçün linki izləyin.',
-                settings.DEFAULT_FROM_EMAIL,
-                [subscriber.email],
-            )
+#         for subscriber in subscribers:
+#             send_mail(
+#                 'Yeni Məqalə Yayınlandı',
+#                 f'{instance.title} adlı yeni məqalə yayımlandı. Məqaləni oxumaq üçün linki izləyin.',
+#                 settings.DEFAULT_FROM_EMAIL,
+#                 [subscriber.email],
+#             )

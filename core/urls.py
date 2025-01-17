@@ -16,8 +16,6 @@ urlpatterns += i18n_patterns(
     path('', include('base.urls', namespace='base')),
     path('makale/', include('article.urls', namespace='article')),
     path('ders/', include('lesson.urls', namespace='lesson')),
-    path('galeri/', include('galery.urls', namespace='galery')),
-    path('iletisim/', include('contact.urls', namespace='contact')),
     path('rosetta/', include('rosetta.urls')),
     prefix_default_language=False,
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

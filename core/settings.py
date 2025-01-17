@@ -21,20 +21,27 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'article.apps.ArticleConfig',
     'lesson.apps.LessonConfig',
-    'galery.apps.GaleryConfig',
-    'contact.apps.ContactConfig',
     'modeltranslation',
     "admin_interface",
     "colorfield",
-    # 'jazzmin',
     'django.contrib.admin',
     'rosetta',
+    'ckeditor',
+    'django_cleanup.apps.CleanupConfig',
 ]
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 200,
+        'width': '100%',
+    },
+}
 
 JAZZMIN_SETTINGS = {
     "site_title": "Cennete Çağrı",
     "site_header": "Cennete Çağrı",
-    "site_logo": "assets/images/custom-logo.png",
+    "site_logo": "images/custom-logo.png",
     "site_brand" : "Cennete Çağrı",
     "welcome_sign": "Cennete Çağrı Yönetim Paneline hoş geldiniz.",
 }

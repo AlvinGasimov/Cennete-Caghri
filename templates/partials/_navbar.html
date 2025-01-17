@@ -25,7 +25,7 @@
             <a href="{% url 'base:index' %}" class="{% if request.path == '/' %} activer {% endif %}">Anasayfa</a>
           </li>
           <li class="font-weight-bold">
-            <a href="{% url 'base:about' %}" class="{% if request.path == '/hakkımızda/' %} activer {% endif %}">Hakkımızda</a>
+            <a href="{% url 'base:about' %}" class="{% if request.path == '/hakkimizda/' %} activer {% endif %}">Hakkımızda</a>
           </li>
           <li class="font-weight-bold">
             <a href="{% url 'article:articles' %}" class="{% if request.path|startswith:'/makale/' %} activer {% endif %}">Makale</a>
@@ -34,10 +34,10 @@
             <a href="{% url 'lesson:lessons' %}" class="{% if request.path|startswith:'/ders/' %} activer {% endif %}">Dersler</a>
           </li>
           <li class="font-weight-bold">
-            <a href="{% url 'galery:galeries' %}" class="{% if request.path == '/galeri/' %} activer {% endif %}">Galeri</a>
+            <a href="{% url 'base:galeries' %}" class="{% if request.path == '/galeri/' %} activer {% endif %}">Galeri</a>
           </li>
           <li class="font-weight-bold">
-            <a href="{% url 'contact:contact' %}" class="{% if request.path == '/iletisim/' %} activer {% endif %}">İletişim</a>
+            <a href="{% url 'base:contact' %}" class="{% if request.path == '/iletisim/' %} activer {% endif %}">İletişim</a>
           </li>
         </ul>
       </div>
@@ -68,10 +68,10 @@
         <a href="{% url 'lesson:lessons' %}">Dersler</a>
       </li>
       <li class="font-weight-bold">
-        <a href="{% url 'galery:galeries' %}">Galeri</a>
+        <a href="{% url 'base:galeries' %}">Galeri</a>
       </li>
       <li class="font-weight-bold">
-        <a href="{% url 'contact:contact' %}">İletişim</a>
+        <a href="{% url 'base:contact' %}">İletişim</a>
       </li>
     </ul>
   </div>

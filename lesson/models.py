@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 
 class LessonCategory(models.Model):
     name = models.CharField(max_length=200, verbose_name = 'Kategori İsmi')
@@ -25,7 +26,7 @@ class LessonCategory(models.Model):
 class Lesson(models.Model):
     category = models.ForeignKey(LessonCategory, on_delete=models.CASCADE, related_name='lessons', verbose_name = 'Kategori')
     title = models.CharField(max_length=200, verbose_name = 'Ders İsmi')
-    description = models.TextField(verbose_name = 'Açıklama')
+    description = RichTextField(verbose_name = 'Açıklama')
     author = models.CharField(max_length=100, verbose_name = 'Yazar')
     video_url = models.URLField(verbose_name = 'Video URL')
     image = models.ImageField(upload_to='lesson/', verbose_name = 'Resim')

@@ -2,9 +2,7 @@
 {% load static %} 
 {% load i18n %} 
 
-{% block title %}
-  Ana Sayfa
-{% endblock %} 
+{% block title %} Ana Sayfa {% endblock %} 
 
 {% block content %}
 
@@ -16,10 +14,10 @@
                 <div class="featured-item" style="height: 100vh; background-image: url({{ slider.image.url }}); padding: 130px 15px 90px 15px;">
                     <div class="featured-cap" style="padding: 30px 0 100px 0;">
                     <h1 style="color: #E8C960; margin-bottom: 30px;">بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ </h1>
-                    <h2 style="color: white; margin-bottom: 30px;">{{ slider.text_arabic }}</h2>
-                    <h3> {{ slider.text_translation }}</h3>
+                    <h2 style="color: white; margin-bottom: 30px;">{{ slider.text_arabic|safe }}</h2>
+                    <h3> {{ slider.text_translation|safe }}</h3>
                     <span>{{ slider.source }}</span>
-                    <a class="thm-btn brd-rd40" href="{% url 'lesson:lessons' %}">Read More</a>
+                    <a class="thm-btn brd-rd40" href="{% url 'lesson:lessons' %}">Daha Fazla</a>
                     </div>
                 </div>
             {% endfor %}
@@ -44,7 +42,7 @@
                     <i class="{{ condition.icon }}"></i>
                     <div class="pilr-info">
                         <h4>{{ condition.title }}</h4>
-                        <p>{{ condition.description|linebreaks }}</p>
+                        <p>{{ condition.description|safe }}</p>
                     </div>
                     </div>
                 </div>
@@ -70,8 +68,8 @@
                     <h3>{{ about.title }}</h3>
                   </div>
                 </div>
-                <p>{{ about.description }}</p>
-                <a class="thm-btn brd-rd40" href="{% url 'base:about' %}">Learn More</a>
+                <p>{{ about.description|safe|truncatewords:70 }}</p>
+                <a class="thm-btn brd-rd40" href="{% url 'base:about' %}">Daha Fazla</a>
               </div>
             </div>
           </div>
@@ -101,7 +99,7 @@
                                     </li>
                                 </ul>
                                 <h4><a href="{% url 'article:article_detail' article.slug %}">{{ article.title }}</a></h4>
-                                <p>{{ article.description|truncatewords:20 }}</p>
+                                <p>{{ article.description|safe|truncatewords:20 }}</p>
                                 <a href="{% url 'article:article_detail' article.slug %}">Daha Fazla Oku</a>
                             </div>
                         </div>
@@ -119,7 +117,7 @@
 
   <section class="mt-5">
     <div class="gap thm-layer opc9 mt-5">
-      <div class="fixed-bg" style="background-image: url({% static 'assets/images/parallax7.jpg' %})"></div>
+      <div class="fixed-bg" style="background-image: url({{ banner.subcsribe_img.url }})"></div>
       <div class="container">
         <div class="nwsltr-wrp text-center">
           <div class="nwsltr-innr">
@@ -134,8 +132,8 @@
             </div>
 
             <div class="nwsltr-title">
-              <h3>Abonelik</h3>
-              <span>Yeni bilgilerden haberdar olmak için abone olun.</span>
+              <h3>{{ banner.subcsribe_title }}</h3>
+              <span>{{ banner.subcsribe_description }}</span>
             </div>
             <form action="{% url 'base:index' %}" method="post">
               {% csrf_token %}

@@ -5,25 +5,11 @@
 <html lang="en">
 <head>
     
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <link rel="icon" href="{{ item.favicon.url }}" sizes="32x32" type="image/png">
-    <title>{{ item.title }} {% block title %} {% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'assets/css/icons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/fancybox.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/jquery.circliful.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
-    <script src="https://kit.fontawesome.com/98ce4f3177.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'assets/css/colors/color.css' %}" title="color" />
-    <link rel="alternate stylesheet" href="{% static 'assets/css/colors/color2.css' %}" title="color2" />
-    <link rel="alternate stylesheet" href="{% static 'assets/css/colors/color3.css' %}" title="color3" />
-    <link rel="alternate stylesheet" href="{% static 'assets/css/colors/color4.css' %}" title="color4" />
+    {% include "links/_meta.html" %}
+    
+    <title>{{ item.title }} | {% block title %} {% endblock %}</title>
+    
+    {% include "links/_css.html" %}
 
 </head>
 <body>
@@ -38,16 +24,7 @@
 
     </main>
 
-    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/downCount.js' %}"></script>
-    <script src="{% static 'assets/js/fancybox.min.js' %}"></script>
-    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'assets/js/perfectscrollbar.min.js' %}"></script>
-    <script src="{% static 'assets/js/wow.min.js' %}"></script>
-    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.circliful.min.js' %}"></script>
-    <script src="{% static 'assets/js/custom-scripts.js' %}"></script>
+    {% include "links/_js.html" %}
 
 </body>
 </html>

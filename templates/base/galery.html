@@ -11,13 +11,13 @@
       <div class="fixed-bg" style="background-image: url({{ banner.galery_img.url }})"></div>
       <div class="container">
         <div class="page-title-wrap">
-          <h1 style="color: white;">{{ banner.galery_arabic_text }}</h1>
-          <h2>Galeri</h2>
+          <h1 style="color: white;">{{ banner.galery_arabic_text|safe }}</h1>
+          <h2>{{ banner.galery_title }}</h2>
           <ul class="breadcrumbs">
             <li>
               <a href="{% url 'base:index' %}">Anasayfa</a>
             </li>
-            <li>Galeri</li>
+            <li>{{ banner.galery_title }}</li>
           </ul>
         </div>
       </div>

@@ -13,11 +13,11 @@
             <div class="fixed-bg" style="background-image: url({{ banner.lesson_img.url }});"></div>
             <div class="container">
                 <div class="page-title-wrap">
-                    <h1 style="color: white;">{{ banner.lesson_arabic_text }}</h1>
-                    <h2>Dersler</h2>
+                    <h1 style="color: white;">{{ banner.lesson_arabic_text|safe }}</h1>
+                    <h2>{{ banner.lesson_title }}</h2>
                     <ul class="breadcrumbs">
                         <li><a href="{% url 'base:index' %}" title="">Ana Sayfa</a></li>
-                        <li>Dersler</li>
+                        <li>{{ banner.lesson_title }}</li>
                     </ul>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                                                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 70%); opacity: 0; transition: opacity 0.4s ease; z-index: 1;" class="hover-glow"></div>
                                                 <img class="mb-3" src="{{ lesson.image.url }}" alt="prtfl-img1" style="width: 100%; height: 250px; object-fit: cover; border-top-right-radius: 20px; border-top-left-radius: 20px;transition: transform 0.4s ease;">
                                                 <h4 style="color: #333; font-size: 22px; margin: 20px 0 10px; font-weight: bold; z-index: 2; position: relative;">{{ lesson.title }}</h4>
-                                                <p style="color: #666; font-size: 16px; margin-bottom: 20px; z-index: 2; position: relative;">{{ lesson.description|slice:":50" }}</p>
+                                                <p style="color: #666; font-size: 16px; margin-bottom: 20px; z-index: 2; position: relative;">{{ lesson.description|safe|truncatewords:10 }}</p>
                                                 <div style="position: absolute; bottom: 15px; right: 15px; background: #E8C960; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); z-index: 2; transition: transform 0.4s ease, background 0.4s ease;">
                                                     <i class="fa fa-arrow-right" style="color: white; font-size: 20px;"></i>
                                                 </div>

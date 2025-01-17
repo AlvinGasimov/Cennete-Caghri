@@ -12,13 +12,13 @@
       <div class="fixed-bg" style="background-image: url({{ banner.article_img.url }})"></div>
       <div class="container">
         <div class="page-title-wrap">
-          <h1 style="color: white;">{{ banner.article_arabic_text }}</h1>
-          <h2>Makaleler</h2>
+          <h1 style="color: white;">{{ banner.article_arabic_text|safe }}</h1>
+          <h2>{{ banner.article_title }}</h2>
           <ul class="breadcrumbs">
             <li>
               <a href="{% url 'base:index' %}">Anasayfa</a>
             </li>
-            <li>Makaleler</li>
+            <li>{{ banner.article_title }}</li>
           </ul>
         </div>
       </div>
@@ -44,7 +44,7 @@
                         </li>
                       </ul>
                       <h4><a href="{% url 'article:article_detail' article.slug %}">{{ article.title }}</a></h4>
-                      <p>{{ article.description|slice:':50' }}</p>
+                      <p>{{ article.description|safe|truncatewords:10 }}</p>
                       <a href="{% url 'article:article_detail' article.slug %}">Daha Fazla Oku</a>
                     </div>
                   </div>
