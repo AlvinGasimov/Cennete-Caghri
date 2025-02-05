@@ -5,7 +5,7 @@ from .models import (
     About, Mission, 
     SubMission, Subscribe,
     PageBanner, Contact,
-    Galery, SEOModel
+    Galery, MetaTag
 )
 
 @admin.register(GeneralItem)
@@ -62,7 +62,7 @@ class PageBannerAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'phone', 'subject', 'created_at')
+    list_display = ('name', 'email', 'phone', 'is_reply', 'created_at')
     search_fields = ('name', 'email', 'phone', 'subject', 'message')
     
 
@@ -70,8 +70,10 @@ class ContactAdmin(admin.ModelAdmin):
 class GaleryAdmin(admin.ModelAdmin):
     list_display = ('title', 'image')
     search_fields = ('title',)
-    
 
-@admin.register(SEOModel)
-class SEOModelAdmin(admin.ModelAdmin):
-    list_display = ('title', 'image', 'keywords', 'twitter_handle')
+
+@admin.register(MetaTag)
+class MetaTagAdmin(admin.ModelAdmin):
+    list_display = ('page_name', 'name', 'content')
+    list_filter = ('page_name', 'name')
+    search_fields = ('page_name', 'name', 'content')

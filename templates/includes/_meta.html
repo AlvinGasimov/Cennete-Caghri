@@ -1,0 +1,16 @@
+{% load static %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    {% for tag in og_tags %}
+        <meta property="{{ tag.name }}" content="{{ tag.content }}">
+    {% endfor %}
+
+    {% for tag in twitter_tags %}
+        <meta name="{{ tag.name }}" content="{{ tag.content }}">
+    {% endfor %}
+
+    {% for tag in other_tags %}
+        <meta name="{{ tag.name }}" content="{{ tag.content }}">
+    {% endfor %}

@@ -1,5 +1,11 @@
 from django.db import models
 from django.utils.text import slugify
+from django.core.mail import send_mail
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.template.loader import render_to_string
+from base.models import Subscribe
 from ckeditor.fields import RichTextField
 
 class LessonCategory(models.Model):
@@ -44,3 +50,25 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = 'Ders'
         verbose_name_plural = 'Dersler'
+        
+        
+@receiver(post_save, sender=Lesson)
+def send_email_on_new_article(sender, instance, created, **kwargs):
+    if created:
+        subscribers = Subscribe.objects.all()
+
+        for subscriber in subscribers:
+            subject = 'Yeni Ders Yayınlandı'
+            message = render_to_string(
+                'lesson/message.html',
+                {
+                    'lesson_title': instance.title,
+                }
+            )
+            send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [subscriber.email],
+            html_message=message, 
+        )

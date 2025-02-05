@@ -1,14 +1,13 @@
-from turtle import mode
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 
 class GeneralItem(models.Model):
-    title = models.CharField(max_length=100, verbose_name = 'Genel Bilgiler Başlığı')
+    title = models.CharField(max_length=100, verbose_name = 'Site Adı')
     description = RichTextField(verbose_name = 'Açıklama')
     email = models.EmailField(verbose_name = 'E-posta')
     address = RichTextField(verbose_name = 'Adres')
-    main_phone_number = models.CharField(max_length = 50, verbose_name = 'En çok kullanılan telefon numarası')
+    main_phone_number = models.CharField(max_length = 50, verbose_name = 'En çok kullanılan telefon numarası', null=True, blank=True)
     favicon = models.ImageField(upload_to = 'favicon', verbose_name = 'Favicon')
     navbar_img = models.ImageField(upload_to='navbar_img', verbose_name = 'Navbar Resmi')
     footer_img = models.ImageField(upload_to='footer_img', verbose_name = 'Footer Resmi')
@@ -167,7 +166,8 @@ class Contact(models.Model):
     phone = models.CharField(max_length=50, verbose_name='Telefon Numarası')
     subject = models.CharField(max_length=300, verbose_name='Konu')
     message = models.TextField(verbose_name='Mesaj')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Olusturulma Tarihi')
+    is_reply = models.BooleanField(default=False, verbose_name='Cevaplandı mı?', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Mesaj Geliş Tarihi')
     
     def __str__(self):
         return self.name
@@ -187,29 +187,35 @@ class Galery(models.Model):
     class Meta:
         verbose_name_plural = 'Galeri'
         
-        
-class SEOModel(models.Model):
-    title = models.CharField(max_length=200, verbose_name="Başlık")
-    description = models.TextField(verbose_name="Açıklama", help_text="İçeriğin kısa açıklaması (SEO ve Sosyal Medya için)")
-    keywords = models.CharField(max_length=300, verbose_name="Anahtar Kelimeler", blank=True, help_text="SEO için anahtar kelimeleri virgülle ayırarak girin.")
-    image = models.ImageField(upload_to="seo_images/", verbose_name="Görsel", blank=True, null=True, help_text="Sosyal medyada gösterilecek görsel.")
-    slug = models.SlugField(unique=True, blank=True, verbose_name="Slug")
-    twitter_handle = models.CharField(max_length=100, verbose_name="Twitter Kullanıcı Adı", blank=True, null=True, help_text="Twitter kartları için kullanılır.")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")    
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Güncellenme Tarihi")
+class MetaTag(models.Model):
+    META_NAME_CHOICES = [
+        ("author", "Yazar"),
+        ("description", "Açıklama"),
+        ("keywords", "Anahtar Kelimeler"),
+        ("robots", "Robots"),
+        ("viewport", "Viewport"),
+        ("og:title", "Open Graph Başlığı"),
+        ("og:description", "Open Graph Açıklaması"),
+        ("og:image", "Open Graph Görseli"),
+        ("twitter:title", "Twitter Başlığı"),
+        ("twitter:description", "Twitter Açıklaması"),
+        ("twitter:image", "Twitter Görseli"),
+    ]
+    
+    page_name = models.CharField(max_length=255, help_text="Ana sayfa için boş bırakınız. Sayfa adı (örnek: Hakkımızda, Servis, Blog, Galeri, İletişim)", blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True)
+    name = models.CharField(max_length=50, choices=META_NAME_CHOICES, help_text="Meta adı veya özelliği")
+    content = models.TextField(help_text="Meta tag içeriği (content)")
+    
+    def save(self, *args, **kwargs):
+        if not self.page_name:
+            self.slug = ""
+        if not self.slug or self.slug != slugify(self.page_name):
+            self.slug = slugify(self.page_name)
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.page_name} - {self.name}"
     
     class Meta:
-        verbose_name = "SEO ve Sosyal Medya"
-        verbose_name_plural = "SEO ve Sosyal Medya"
-        ordering = ["-created_at"]
-
-    def save(self, *args, **kwargs):
-        if not self.slug or self.slug != slugify(self.title):
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return reverse("seo_detail", kwargs={"slug": self.slug})
-
-    def __str__(self):
-        return self.title
+        verbose_name_plural = "SEO"

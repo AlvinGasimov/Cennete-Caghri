@@ -3,28 +3,28 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
-    {% include "links/_meta.html" %}
-    
-    <title>{{ item.title }} | {% block title %} {% endblock %}</title>
-    
-    {% include "links/_css.html" %}
+  <head>
+    {% include 'includes/_meta.html' %}
 
-</head>
-<body>
+    <title>
+      {{ item.title }} |{% block title %}
 
+      {% endblock %}
+    </title>
+
+    {% include 'includes/_css.html' %}
+  </head>
+  <body>
     <main>
+      {% include 'partials/_navbar.html' %}
 
-        {% include "partials/_navbar.html" %}
+      {% block content %}
 
-        {% block content %} {% endblock %}
+      {% endblock %}
 
-        {% include "partials/_footer.html" %}
-
+      {% include 'partials/_footer.html' %}
     </main>
 
-    {% include "links/_js.html" %}
-
-</body>
+    {% include 'includes/_js.html' %}
+  </body>
 </html>

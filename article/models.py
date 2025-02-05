@@ -50,15 +50,23 @@ class Article(models.Model):
         verbose_name_plural = 'Makaleler'
         
 
-# @receiver(post_save, sender=Article)
-# def send_email_on_new_article(sender, instance, created, **kwargs):
-#     if created:  # Yalnız yeni məqalə yaradıldıqda
-#         subscribers = Subscribe.objects.all()
+@receiver(post_save, sender=Article)
+def send_email_on_new_article(sender, instance, created, **kwargs):
+    if created:
+        subscribers = Subscribe.objects.all()
 
-#         for subscriber in subscribers:
-#             send_mail(
-#                 'Yeni Məqalə Yayınlandı',
-#                 f'{instance.title} adlı yeni məqalə yayımlandı. Məqaləni oxumaq üçün linki izləyin.',
-#                 settings.DEFAULT_FROM_EMAIL,
-#                 [subscriber.email],
-#             )
+        for subscriber in subscribers:
+            subject = 'Yeni Makale Yayınlandı'
+            message = render_to_string(
+                'article/message.html',
+                {
+                    'article_title': instance.title,
+                }
+            )
+            send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [subscriber.email],
+            html_message=message, 
+        )

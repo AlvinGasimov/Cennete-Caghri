@@ -5,12 +5,13 @@ from os import getenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-3@=yv%#a06nsd6a547(n*hdz3w29n3aois=l(6#17n32)9hswq'
+# SECRET_KEY = getenv('SECRET_KEY')
 
 DEBUG = True
+DEBUG = getenv('DEBUG')
+
 ALLOWED_HOSTS = []
 
-# DEBUG = False
-# ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -145,3 +146,10 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'metin.qardasov2003@gmail.com'
 EMAIL_HOST_PASSWORD = 'qiej mpvi lpfj cyog'
 DEFAULT_FROM_EMAIL = 'metin.qardasov2003@gmail.com'
+
+# EMAIL_BACKEND = getenv('EMAIL_BACKEND')
+# EMAIL_HOST = getenv('EMAIL_HOST')
+# EMAIL_PORT = getenv('EMAIL_PORT')
+# EMAIL_USE_TLS = getenv('EMAIL_USE_TLS')
+# EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
