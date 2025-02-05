@@ -139,17 +139,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = []
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'metin.qardasov2003@gmail.com'
-EMAIL_HOST_PASSWORD = 'qiej mpvi lpfj cyog'
-DEFAULT_FROM_EMAIL = 'metin.qardasov2003@gmail.com'
-
-# EMAIL_BACKEND = getenv('EMAIL_BACKEND')
-# EMAIL_HOST = getenv('EMAIL_HOST')
-# EMAIL_PORT = getenv('EMAIL_PORT')
-# EMAIL_USE_TLS = getenv('EMAIL_USE_TLS')
-# EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = getenv('EMAIL_BACKEND')
+EMAIL_HOST = getenv('EMAIL_HOST')
+EMAIL_PORT = getenv('EMAIL_PORT')
+EMAIL_USE_TLS = getenv('EMAIL_USE_TLS')
+EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
