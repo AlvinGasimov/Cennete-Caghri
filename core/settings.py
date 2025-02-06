@@ -112,7 +112,7 @@ USE_L10N = True
 
 USE_I18N = True
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Istanbul'
 
 LANGUAGES = (
     ('tr', 'Turkish'),
