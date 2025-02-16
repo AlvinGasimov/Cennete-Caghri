@@ -19,7 +19,7 @@ Aşağıdaki programlar bilgisayarınızda kurulu olmalıdır:
 Öncelikle projeyi Git kullanarak bilgisayarınıza klonlayın:
 
 ```bash
-git clone https://github.com/MetinQardasov11/Ahlak-ve-Sunnet-Dergisi.git
+git clone https://github.com/MetinQardasov11/Cennete-Caghri.git
 ```
 <br>
 
@@ -35,7 +35,7 @@ source env/bin/activate
 #### Windows:
 
 ```bash
-python -m venv env
+py -m venv env
 .\env\Scripts\activate
 ```
 <br>
@@ -59,8 +59,8 @@ python3 manage.py migrate
 #### Windows:
 
 ```bash
-python manage.py makemigrations
-python manage.py migrate
+py manage.py makemigrations
+py manage.py migrate
 ```
 
 <br>
@@ -76,7 +76,7 @@ python3 manage.py createsuperuser
 #### Windows:
 
 ```bash
-python manage.py createsuperuser
+py manage.py createsuperuser
 ```
 
 <br>
@@ -92,7 +92,7 @@ python3 manage.py collectstatic
 #### Windows:
 
 ```bash
-python manage.py collectstatic
+py manage.py collectstatic
 ```
 
 <br>
@@ -108,7 +108,7 @@ python3 manage.py runserver
 #### Windows:
 
 ```bash
-python manage.py runserver
+py manage.py runserver
 ```
 <br>
 
